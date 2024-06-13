@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<style>
+#animate { width: 50px; height: 50px; position: absolute; background: red; }
+#apple { width: 50px; height: 50px; position: absolute; background: greenyellow; }
+#dialog {position: fixed; top: 0; left: 90vw;}
+#play {margin: auto; width: 500px; height:200px; position:fixed; left:50%; top: 50%; transform:translate(-50%, 50%);}
+#button {width: 100%; height:100%}
+</style>
+<body>
+<div id="animate"></div>
+<div id="apple"></div>
+<div id="dialog"></div>
+<script>
+var score = 0;
+var time = 60.00;
+var applereflashtime = 5.00;
+var elem1 = document.getElementById("animate");
+var elem2 = document.getElementById("apple");
+var elem3 = document.getElementById("dialog");
+var x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+
+window.addEventListener("keydown", function (e) {
+    if (time > 0) {
+        if (e.key === "ArrowUp") {y1--;}
+        if (e.key === "ArrowDown") {y1++;}
+        if (e.key === "ArrowLeft") {x1--;}
+        if (e.key === "ArrowRight") {x1++;}}
+    })
+function displayanimate(){
+    elem1.style.left = x1*50+5 + "px";
+    elem1.style.top = y1*50+5 + "px";
+}
+function displayapple(){
+    x2 = Math.floor((Math.random()*29));
+    y2 = Math.floor((Math.random()*14));
+    elem2.style.left = x2*50+5 + "px";
+    elem2.style.top = y2*50+5 + "px";
+    applereflashtime = 5;
+}
+function rungame() {
+    displayanimate();
+    if ((x1 == x2)&&(y1 == y2)) {
+        applereflashtime = 0;
+        score++;
+    }
+    time -= 0.01;
+    applereflashtime -= 0.01;
+    elem3.innerHTML = "<p>time:"+Math.floor(time)+"</p><p>score:"+score+"</p>";
+    if (applereflashtime <= 0) {displayapple();}
+    if (time > 0) {setTimeout(function() {rungame();}, 10);}
+    else {alert("Time's up");}
+}
+displayapple();
+rungame();
+</script>
+</body></html>
