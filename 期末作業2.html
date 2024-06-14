@@ -53,7 +53,7 @@ function rungame() {
     elem3.innerHTML = "<p>time:"+Math.floor(time)+"</p><p>score:"+score+"</p>";
     if (applereflashtime <= 0) {displayapple();}
     if (time > 0) {setTimeout(function() {rungame();}, 10);}
-    else {alert("Is time to go to bed!");}
+    else {alert("It is time to go to bed!");}
 }
 displayapple();
 rungame();
